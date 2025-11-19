@@ -1,11 +1,11 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.NUMERIC_STD.ALL;
+
 
 entity top is
 Port (
-    re1, im1, re2, im2 : in signed (7 downto 0) := "00000000";
-    re_o, im_o : out signed (7 downto 0)
+    re1, im1, re2, im2 : in integer range -128 to 127 := 0;
+    re_o, im_o : out integer range -128 to 127
 );
 end top;
 
