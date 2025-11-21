@@ -1,0 +1,39 @@
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+
+entity complex_multiplier is
+
+Port (
+    re1, im1, re2, im2 : in integer range -128 to 127 := 0;
+    re_o, im_o : out integer range -128 to 127
+);
+end complex_multiplier;
+
+architecture Behavioral of complex_multiplier is
+    signal temp1, temp2, temp3 : integer range -128 to 127;
+
+begin
+  multiply1 : process (re1, im1, re2, im2)
+    begin
+        temp1 <= (re1+im1)*(re2-im2);
+    end process multiply1;
+  multiply2 : process (re1, im2)
+    begin
+        temp2 <= re1*im2;
+    end process multiply2;
+  multiply3 : process (re2, im1)
+    begin
+        temp3 <= re2 * im1;
+    end process multiply3;
+  realteil : process (re1, im1, re2, im2, temp1)
+    begin
+        re_o <= temp1 + re1 * im2 - re2 * im1;
+    end process realteil;
+  imaginaerteil : process (temp2, temp3)
+    begin
+        im_o <= temp2 + temp3;
+    end process imaginaerteil;
+         
+end Behavioral;
