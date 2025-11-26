@@ -7,12 +7,12 @@ entity complex_multiplier is
 
 Port (
     re1, im1, re2, im2 : in integer range -128 to 127 := 0;
-    re_o, im_o : out integer range -128 to 127
+    re_o, im_o : out integer range -128 to 127 := 0 
 );
 end complex_multiplier;
 
 architecture Behavioral of complex_multiplier is
-    signal temp1, temp2, temp3 : integer range -128 to 127;
+    signal temp1, temp2, temp3 : integer range -128 to 127 := 0;
 
 begin
   multiply1 : process (re1, im1, re2, im2)
