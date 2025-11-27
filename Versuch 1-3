@@ -29,7 +29,7 @@ begin
     end process multiply3;
   realteil : process (re1, im1, re2, im2, temp1)
     begin
-        re_o <= temp1 + re1 * im2 - re2 * im1;
+        re_o <= temp1 + temp2 - temp3;
     end process realteil;
   imaginaerteil : process (temp2, temp3)
     begin
