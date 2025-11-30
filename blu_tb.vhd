@@ -91,6 +91,7 @@ begin
         ta <= "0-UUU10-";
         tb <= "XX10-0-1";
         toperation <= "01";
+        wait for 50 ns;
         ta <= (others => 'U');
         tb <= (others => 'U');
         toperation <= "10";
