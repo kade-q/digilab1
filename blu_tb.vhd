@@ -73,8 +73,8 @@ begin
         tb <= (others => 'U');
         toperation <= "00";
         wait for 50 ns;
-        ta <= "000001UX";
-        tb <= "00000XXX";
+        ta <= "0000-1UX";
+        tb <= "0000-XXX";
         toperation <= "00";
         wait for 50 ns;
         ta <= "0-UUU10-";
@@ -84,8 +84,8 @@ begin
         tb <= (others => 'U');
         toperation <= "01";
         wait for 50 ns;
-        ta <= "000001UX";
-        tb <= "00000XXX";
+        ta <= "0000-1UX";
+        tb <= "0000-XXX";
         toperation <= "01";
         wait for 50 ns;
         ta <= "0-UUU10-";
@@ -96,8 +96,8 @@ begin
         tb <= (others => 'U');
         toperation <= "10";
         wait for 50 ns;
-        ta <= "000001UX";
-        tb <= "00000XXX";
+        ta <= "0000-1UX";
+        tb <= "0000-XXX";
         toperation <= "10";
         wait for 50 ns;
         ta <= "0-UUU10-";
@@ -108,8 +108,8 @@ begin
         tb <= (others => 'U');
         toperation <= "11";
         wait for 50 ns;
-        ta <= "000001UX";
-        tb <= "00000XXX";
+        ta <= "0000-1UX";
+        tb <= "0000-XXX";
         toperation <= "11";
         wait for 50 ns;
         ta <= "0-UUU10-";
