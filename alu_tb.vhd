@@ -105,14 +105,21 @@ begin
         wait for 50 ns;
         ta <= "01010101";
         tb <= "01101001";
-        toperation <= "101";
+        wait for 50 ns;
+        ta <= "01111111";
+        tb <= "10000000";
+        wait for 50 ns;
+        ta <= "10000000";
+        tb <= "01111111";
         wait for 50 ns;
         toperation <= "110";
         wait for 50 ns;
         toperation <= "111";
         wait for 50 ns;
     
-        assert operation = "110" or "111" report "Illegal value for operation. This computer will now self-destruct. Goodbye!" severity error;
+        assert toperation = "110" report "Illegal value for operation. This computer will now self-destruct. Goodbye!" severity error;
+        assert toperation = "111" report "Illegal value for operation. This computer will now self-destruct. Goodbye!" severity error;
+        wait;
     end process stimuli;
 
 end sim;
