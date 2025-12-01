@@ -1,0 +1,118 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity alu_tb is
+--  Port ( );
+end alu_tb;
+
+architecture sim of alu_tb is
+    component alu 
+        Port (operation: in std_logic_vector (2 downto 0) := "000";
+            a,b: in std_logic_vector (7 downto 0) := "00000000";
+            result: out std_logic_vector (8 downto 0));
+    end component;
+    signal toperation: std_logic_vector (2 downto 0);
+    signal ta, tb: std_logic_vector (7 downto 0);
+    signal tresult: std_logic_vector (8 downto 0);
+begin
+    dut: alu port map (operation => toperation, a => ta, b => tb, result => tresult);
+    stimuli: process  
+    begin
+        ta <= (others => '0');
+        tb <= (others => '0');
+        toperation <= "000";
+        wait for 50 ns;
+        ta <= "00000001";
+        tb <= "00000001";
+        toperation <= "000";
+        wait for 50 ns;
+        ta <= "01010101";
+        tb <= "01101001";
+        toperation <= "000";
+        wait for 50 ns;
+        ta <= (others => '0');
+        tb <= (others => '0');
+        toperation <= "001";
+        wait for 50 ns;
+        ta <= "00000001";
+        tb <= "00000001";
+        toperation <= "001";
+        wait for 50 ns;
+        ta <= "01010101";
+        tb <= "01101001";
+        toperation <= "001";
+        wait for 50 ns;
+        ta <= (others => '0');
+        tb <= (others => '0');
+        toperation <= "010";
+        wait for 50 ns;
+        ta <= "00000001";
+        tb <= "00000001";
+        toperation <= "010";
+        wait for 50 ns;
+        ta <= "01010101";
+        tb <= "01101001";
+        toperation <= "010";
+        wait for 50 ns;
+        ta <= (others => '0');
+        tb <= (others => '0');
+        toperation <= "011";
+        wait for 50 ns;
+        ta <= "00000001";
+        tb <= "00000001";
+        toperation <= "011";
+        wait for 50 ns;
+        ta <= "01010101";
+        tb <= "01101001";
+        toperation <= "011";
+        wait for 50 ns;  
+        ta <= (others => '0');
+        tb <= (others => '0');
+        toperation <= "100";
+        wait for 50 ns;
+        ta <= "00000001";
+        tb <= "00000001";
+        wait for 50 ns;
+        ta <= "11111111";
+        tb <= "11111111";
+        wait for 50 ns;
+        ta <= "10000000";
+        tb <= "10000000";
+        wait for 50 ns;
+        ta <= "01111111";
+        tb <= "01111111";
+        wait for 50 ns;
+        ta <= "01010101";
+        tb <= "01101001";
+        toperation <= "100";
+        wait for 50 ns;
+        ta <= (others => '0');
+        tb <= (others => '0');
+        toperation <= "101";
+        wait for 50 ns;
+        ta <= "00000001";
+        tb <= "00000001";
+        wait for 50 ns;
+        ta <= "11111111";
+        tb <= "11111111";
+        wait for 50 ns;
+        ta <= "10000000";
+        tb <= "10000000";
+        wait for 50 ns;
+        ta <= "01111111";
+        tb <= "01111111";
+        wait for 50 ns;
+        ta <= "01010101";
+        tb <= "01101001";
+        toperation <= "101";
+        wait for 50 ns;
+        toperation <= "110";
+        wait for 50 ns;
+        toperation <= "111";
+        wait for 50 ns;
+    
+        assert operation = "110" or "111" report "Illegal value for operation. This computer will now self-destruct. Goodbye!" severity error;
+    end process stimuli;
+
+end sim;
