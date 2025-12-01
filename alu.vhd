@@ -11,7 +11,7 @@ end alu;
 
 architecture Behavioral of alu is
     signal a_s, b_s, result_s: signed (8 downto 0) := "000000000";
-    signal MSB_a, MSB_b: std_logic_vector := "00000000";
+    signal MSB_a, MSB_b: std_logic_vector (7 downto 0):= "00000000";
 
 begin
     convert: process (a, b, MSB_a, MSB_b)
@@ -43,7 +43,7 @@ begin
         when "101" =>    
             result_s <= a_s - b_s;
             result <= std_logic_vector(result_s);
-        when "101" => result <= "XXXXXXXXX";
+        when "110" => result <= "XXXXXXXXX";
         when "111" => result <= "XXXXXXXXX";
         when others => null;
         end case;
