@@ -11,14 +11,23 @@ entity fcalc is
 end fcalc;
 
 architecture Behavioral of fcalc is
-    signal temp: signed (9 downto 0):= "0000000000";
-    signal twoa, result: signed (8 downto 0) := "000000000";
+    signal temp, twoa: signed (9 downto 0):= "0000000000";
+    signal result: signed (8 downto 0) := "000000000";
+    signal msba: signed (7 downto 0) := "00000000";
 
 begin
-
-multiply: process (a)
+checkmsb: process (a)
 begin
-    twoa <= shift_left(a, 0);
+    msba <= a and "1000000";
+end process checkmsb; 
+
+multiply: process (a, msba)
+begin
+    if msba = "10000000" then
+            twoa <= '1' & a & '0';
+        else
+            twoa <= '0' & a & '0';
+    end if;     
 end process multiply;
 
 subtract: process (twoa, b)
@@ -31,7 +40,7 @@ begin
     result <= temp (9 downto 1);
 end process divide;
 
-decide: process (result)
+decide: process (en, result)
 begin
     if en = '1' then
             c <= result;
