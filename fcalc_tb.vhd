@@ -41,7 +41,6 @@ begin
         wait for 50 ns;
         ta <= "11111110";
         tb <= "10101010";
-        wait for 50 ns;
         wait;
     end process stimuli;
 end sim;
