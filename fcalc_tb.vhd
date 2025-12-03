@@ -32,6 +32,13 @@ begin
         tb <= "10000000";
         wait for 50 ns;
         ten <= '1';
+        wait for 50 ns;
+        ta <= "01010101";
+        tb <= "10000000";
+        wait for 50 ns;
+        ta <= "01111111";
+        tb <= "10101010";
+        wait for 50 ns;
         wait;
     end process stimuli;
 end sim;
