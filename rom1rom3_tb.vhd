@@ -25,7 +25,8 @@ end component;
 
 signal tb_address: std_logic_vector (2 downto 0):= "000";
 signal tb_clk: std_logic;
-signal tb_data: std_logic_vector (7 downto 0);
+signal tb_data1: std_logic_vector (7 downto 0);
+signal tb_data3: std_logic_vector (7 downto 0);
 signal next_address: unsigned (2 downto 0):= "000";
 
 begin
@@ -33,13 +34,13 @@ begin
     DUT1: rom1 port map (
         address => tb_address,
         clk => tb_clk,
-        data => tb_data
+        data => tb_data1
         );
 
     DUT2: rom3 port map (
         address => tb_address,
         clk => tb_clk,
-        data => tb_data
+        data => tb_data3
         );
         
    clk_gen : process
@@ -57,3 +58,4 @@ begin
    end process update_address;
 
 end sim;
+
