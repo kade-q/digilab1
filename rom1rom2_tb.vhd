@@ -69,8 +69,8 @@ begin
         else
             expected_data := "00000000";
         end if;     
-        assert tb_data1 = (tb_address + 1) * (tb_address + 1) report "data does not have the expected value" severity error;
-        assert tb_data2 = (tb_address + 1) * (tb_address + 1) report "data does not have the expected value" severity error;
+        assert tb_data1 = std_logic_vector(expected_data) report "data does not have the expected value" severity error;
+        assert tb_data2 = std_logic_vector(expected_data) report "data does not have the expected value" severity error;
 
    end process check_data;
    
