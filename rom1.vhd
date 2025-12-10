@@ -24,7 +24,7 @@ begin
             when "100" => ndata <= "00011001";
             when "101" => ndata <= "00100100";
             when "110" => ndata <= "00110001";
-            when others => null;
+            when others => ndata <= "00000000";
         end case;
     end process rom;
 
