@@ -45,7 +45,7 @@ begin
    clk_gen : process
    begin
         tb_clk <= transport '1' after 50 ns, '0' after 100 ns;
-        wait for 100ns; 
+        wait for 100 ns; 
    end process clk_gen;
    
    update_address: process (tb_clk)
