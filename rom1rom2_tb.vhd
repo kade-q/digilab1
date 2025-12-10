@@ -25,7 +25,8 @@ end component;
 
 signal tb_address: std_logic_vector (2 downto 0):= "000";
 signal tb_clk: std_logic;
-signal tb_data: std_logic_vector (7 downto 0);
+signal tb_data1: std_logic_vector (7 downto 0);
+signal tb_data2: std_logic_vector (7 downto 0);
 signal next_address: unsigned (2 downto 0):= "000";
 
 begin
@@ -33,13 +34,13 @@ begin
     DUT1: rom1 port map (
         address => tb_address,
         clk => tb_clk,
-        data => tb_data
+        data => tb_data1
         );
 
     DUT2: rom2 port map (
         address => tb_address,
         clk => tb_clk,
-        data => tb_data
+        data => tb_data2
         );
         
    clk_gen : process
@@ -68,9 +69,12 @@ begin
         else
             expected_data := "00000000";
         end if;     
-        assert tb_data = (tb_address + 1) * (tb_address + 1) report "data does not have the expected value" severity error;
+        assert tb_data1 = (tb_address + 1) * (tb_address + 1) report "data does not have the expected value" severity error;
+        assert tb_data2 = (tb_address + 1) * (tb_address + 1) report "data does not have the expected value" severity error;
+
    end process check_data;
    
         
 end sim;
+
 
