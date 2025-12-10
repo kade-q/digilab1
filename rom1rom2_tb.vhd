@@ -23,10 +23,10 @@ component rom2
     );
 end component;
 
-signal tb_address: std_logic_vector (2 downto 0);
+signal tb_address: std_logic_vector (2 downto 0):= "000";
 signal tb_clk: std_logic;
 signal tb_data: std_logic_vector (7 downto 0);
-signal next_address: unsigned (2 downto 0);
+signal next_address: unsigned (2 downto 0):= "000";
 
 begin
 
@@ -58,10 +58,19 @@ begin
    end process update_address;
    
    check_data: process
+        variable expected_data : unsigned (7 downto 0);
    begin
+        wait until falling_edge(tb_clk);
         wait until tb_clk = '1';
-        assert tb_data = (tb_address + 1) * (tb_address + 1) report "data does not have the expected value";
+        wait for 5 ns;
+        if tb_address = "000" or tb_address = "001" or tb_address = "010" or tb_address = "011" or tb_address = "100" or tb_address = "101" or tb_address = "110" then
+            expected_data := "00" & (unsigned (tb_address) + 1) * (unsigned (tb_address) +1);
+        else
+            expected_data := "00000000";
+        end if;     
+        assert tb_data = (tb_address + 1) * (tb_address + 1) report "data does not have the expected value" severity error;
    end process check_data;
    
         
 end sim;
+
