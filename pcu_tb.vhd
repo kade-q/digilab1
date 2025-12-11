@@ -67,7 +67,6 @@ begin
     wait until initialized = '1' and clk_tb = '0';
         case inputs_tb is
         when "---" => inputs_tb <= "1--";
-        when "---" => inputs_tb <= "1--";
 		when "1--" => inputs_tb <= "100";
 		when "100" => inputs_tb <= "101";
 		when "101" => inputs_tb <= "110";
