@@ -77,7 +77,7 @@ begin
         when "001" => inputs_tb <= "011";
 		when "011" => inputs_tb <= "000";
 		when "XXX" => inputs_tb <= "UUU";
-		when "UUU" => inputs_tb <= "000";
+		when "UUU" => inputs_tb <= "---";
 		when others => inputs_tb <= "000";
 				assert false report "Fehler in der Testbench" severity error;       
         end case;
