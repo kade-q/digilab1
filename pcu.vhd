@@ -26,7 +26,7 @@ begin
     begin
         if rising_edge(clk) then
             if reset = '1' then
-                next_pc <= "0000000000000000";
+                next_pc <= (others => '0');
             else
                 case inputs is
                     when "1--" => next_pc <= next_pc;
@@ -35,7 +35,7 @@ begin
                     when "001" => next_pc <= std_logic_vector (unsigned(next_pc) + unsigned(loadvalue));
                     when "011" => next_pc <= next_pc;
                         assert false report "setting load and jump at the same time is illegal!" severity note;
-                    when others => next_pc <= (others => 'X');
+                    when others => next_pc <= (others => '0');
                         assert false report "undefined entry!" severity note; 
                end case;                                       
             end if;
