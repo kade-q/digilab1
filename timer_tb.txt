@@ -1,0 +1,57 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity timer_tb is       
+end timer_tb;
+
+architecture timer_tb_arch of timer_tb is
+
+component timer is
+  generic(
+    divide_value : integer := 99);   --Zaehlerendwert Hardware / Simulation
+  port
+   (clk_100mhz: in  std_logic; --100 MHz Systemclock (Quarz auf NEXYS4 )
+    reset     : in  std_logic;
+    sec_puls  : out std_logic
+   );
+end component;
+
+    signal clk_100mhz_tb : std_logic := '0';
+    signal reset_tb : std_logic;
+	signal sec_puls_tb : std_logic;
+
+begin
+	dut: timer generic map (99) port map(
+		clk_100mhz => clk_100mhz_tb,
+		reset => reset_tb,
+		sec_puls => sec_puls_tb
+	);
+	
+	clock_generator: process(clk_100mhz_tb)
+	begin
+		clk_100mhz_tb <= not clk_100mhz_tb after 5 ns;
+	end process clock_generator;
+	
+	check: process
+	begin
+		reset_tb <= '1';
+		
+		wait for 1 ns;
+		
+		reset_tb <= '0';
+		
+		wait for 49 ns;
+		
+		reset_tb <= '1';
+		
+		wait for 1 ns;
+		
+		reset_tb <= '0';
+		
+		wait for 1 ns;
+		
+		wait;
+	end process check;
+
+end architecture timer_tb_arch;
