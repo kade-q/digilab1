@@ -11,21 +11,15 @@ architecture Behavioral of alarm_tb is
 
 component alarm_1p
    Port (
-   pc: in std_logic_vector (15 downto 0);
    validate, door_open, go, reset, clk: in std_logic;
-   alarm, stop, load: out std_logic;
-   loadvalue: out std_logic_vector (15 downto 0);
-   jump: out std_logic := '0' 
+   alarm: out std_logic
     );
 end component;
 
 component alarm_mp
    Port (
-   pc: in std_logic_vector (15 downto 0);
    validate, door_open, go, reset, clk: in std_logic;
-   alarm, stop, load: out std_logic;
-   loadvalue: out std_logic_vector (15 downto 0);
-   jump: out std_logic := '0' 
+   alarm: out std_logic
     );
 end component;
 
@@ -42,35 +36,35 @@ signal jump_tb_mp: std_logic;
 begin
 
 DUT1: alarm_1p port map(
-    pc => pc_tb,
+    --pc => pc_tb,
     validate => validate_tb,
     door_open => door_open_tb,
     go => go_tb,
     reset => reset_tb,
-    clk => clk_tb,
-    alarm => alarm_tb_1p,
-    stop => stop_tb_1p,
-    load => load_tb_1p,
-    loadvalue => loadvalue_tb_1p,
-    jump => jump_tb_1p
+    clk => clk_tb
+    --alarm => alarm_tb_1p,
+    --stop => stop_tb_1p,
+    --load => load_tb_1p,
+    --loadvalue => loadvalue_tb_1p,
+    --jump => jump_tb_1p
     );
     
  DUT2: alarm_mp port map(
-    pc => pc_tb,
+    --pc => pc_tb,
     validate => validate_tb,
     door_open => door_open_tb,
     go => go_tb,
     reset => reset_tb,
-    clk => clk_tb,
-    alarm => alarm_tb_mp,
-    stop => stop_tb_mp,
-    load => load_tb_mp,
-    loadvalue => loadvalue_tb_mp,
-    jump => jump_tb_mp
+    clk => clk_tb
+    --alarm => alarm_tb_mp,
+    --stop => stop_tb_mp,
+    --load => load_tb_mp,
+    --loadvalue => loadvalue_tb_mp,
+    --jump => jump_tb_mp
     );
     
 -- Clock
-clk_gen : process
+clk_gen : process (clk_tb)
 begin
     clk_tb <= not clk_tb after 100 ns;
 end process clk_gen;
@@ -87,7 +81,7 @@ begin
     go_tb <= '1';
     wait for 300 ns;
     door_open_tb <= '1';
-    wait for 3000 ns;
+    wait for 6000 ns;
     -- triggers alarm
     validate_tb <= '1';
     go_tb <= '0';

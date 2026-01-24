@@ -4,22 +4,23 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity alarm_mp is
   Port (
-  pc: in std_logic_vector (15 downto 0);
   validate, door_open, go, reset, clk: in std_logic;
-  alarm, stop, load: out std_logic;
-  loadvalue: out std_logic_vector (15 downto 0);
-  jump: out std_logic := '0' 
+  alarm: out std_logic
    );
 end alarm_mp;
 
 architecture rtl of alarm_mp is
     type states is (s0, s1, s2, s3);
     signal state, state_nxt: states;
+    signal pc: std_logic_vector (15 downto 0);
+    signal loadvalue: std_logic_vector (15 downto 0);
+    signal load, stop: std_logic;
+
     component pcu
         Port (clk: in std_logic;
             reset: in std_logic;
             load: in std_logic;
-            jump: in std_logic;
+            jump: in std_logic := '0';
             stop: in std_logic;
             loadvalue: in std_logic_vector (15 downto 0);
             pc: out std_logic_vector (15 downto 0)
@@ -28,19 +29,22 @@ architecture rtl of alarm_mp is
 
 begin
 
+c1:pcu port map(
+    clk => clk,
+    reset => reset,
+    load => load,
+    stop => stop,
+    loadvalue => loadvalue,
+    pc => pc
+    );
+
 reg: process (clk, reset)
 begin
     if rising_edge (clk) then
         --synchronous reset
         if reset = '1' then
-            -- counter pc resets to 0
-            loadvalue <= (others => '0');
-            load <= '1';
-            stop <= '0';
             -- back to initial state
             state <= s0;
-            -- resetting alarm
-            alarm <= '0';
         else
             --advance to next state
             state <= state_nxt; 
@@ -48,7 +52,7 @@ begin
     end if;
 end process reg;
 
-fxns: process(state, validate, door_open, go)
+fxns: process(state, validate, door_open, pc, go)
 begin
     --default value
     state_nxt <= state;

@@ -4,22 +4,23 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity alarm_1p is
   Port (
-  pc: in std_logic_vector (15 downto 0);
   validate, door_open, go, reset, clk: in std_logic;
-  alarm, stop, load: out std_logic;
-  loadvalue: out std_logic_vector (15 downto 0);
-  jump: out std_logic := '0' 
+  alarm: out std_logic
    );
 end alarm_1p;
 
 architecture rtl of alarm_1p is
     type states is (s0, s1, s2, s3);
     signal state: states;
+    signal pc: std_logic_vector (15 downto 0);
+    signal loadvalue: std_logic_vector (15 downto 0);
+    signal load, stop: std_logic;
+
     component pcu
         Port (clk: in std_logic;
             reset: in std_logic;
             load: in std_logic;
-            jump: in std_logic;
+            jump: in std_logic := '0';
             stop: in std_logic;
             loadvalue: in std_logic_vector (15 downto 0);
             pc: out std_logic_vector (15 downto 0)
@@ -27,6 +28,15 @@ architecture rtl of alarm_1p is
     end component;
 
 begin
+
+c1:pcu port map(
+    clk => clk,
+    reset => reset,
+    load => load,
+    stop => stop,
+    loadvalue => loadvalue,
+    pc => pc
+    );
 
 p1: process(clk, reset)
 begin
