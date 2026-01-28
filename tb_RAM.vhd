@@ -42,7 +42,7 @@ begin
         doutb => tb_doutb);
         
     
-    clk_gen: process
+    clk_gen: process (tb_clk)
     begin
         tb_clk <= not tb_clk after 5ns;
     end process clk_gen;     
@@ -50,63 +50,42 @@ begin
     write_and_read: process
     begin
         -- write
-        if falling_edge(tb_clk) then
             tb_addra <= (others => '0');
             tb_dina <= (others => '0');
             tb_wea <= '1';
             tb_ena <= '1';
-        end if;
-        wait for 5ns;
-        if falling_edge(tb_clk) then
+        wait for 10 ns;
             tb_addra <= ("00001010");
             tb_dina <= ("0000000010100000");
-        end if;
-        wait for 5ns;
-        if falling_edge(tb_clk) then
+        wait for 10 ns;
             tb_addra <= ("00001111");
             tb_dina <= ("0000000010101111");
-        end if;
-        wait for 5ns;
-        if falling_edge(tb_clk) then
+        wait for 10 ns;
             tb_addra <= ("10001111");
             tb_dina <= ("1000000010101111");
-        end if;
-        wait for 5ns;
-        if falling_edge(tb_clk) then
+        wait for 10 ns;
             tb_addra <= ("11111111");
             tb_dina <= ("1111000010101111");
-        end if;
-        wait for 5ns;
-        if falling_edge(tb_clk) then
+        wait for 10 ns;
             tb_addra <= (others => '0');
             tb_dina <= (others => '0');
             tb_wea <= '0';
             tb_ena <= '0';
-        end if;
         
         -- read
-        wait for 20ns;
-        if falling_edge (tb_clk) then
+        wait for 20 ns;
             tb_enb <= '1';
-            tb_addrb <= (others => '0');
-        end if;    
-        wait for 5ns;
-        if falling_edge (tb_clk) then
+            tb_addrb <= (others => '0');   
+        wait for 10 ns;
             tb_addrb <= ("00001111");
-        end if;
-        wait for 5ns;
-        if falling_edge (tb_clk) then
+        wait for 10 ns;
             tb_addrb <= ("00001111");
-        end if;
-        wait for 5ns;
-        if falling_edge (tb_clk) then
+        wait for 10 ns;
             tb_addrb <= ("10001111");
-        end if;
-        wait for 5ns;
-        if falling_edge (tb_clk) then
+        wait for 10 ns;
             tb_addrb <= ("11111111");
-        end if;
-        wait for 5ns;
+        wait for 10 ns;
+            tb_enb <= '0';
         wait;
 
     end process write_and_read;
