@@ -26,8 +26,6 @@ end component ram_samples_255x16;
 signal tb_clk, tb_wea, tb_ena, tb_enb: std_logic := '0';
 signal tb_addra, tb_addrb: std_logic_vector(7 downto 0);
 signal tb_dina, tb_doutb: std_logic_vector(15 downto 0);
---signal address: std_logic_vector(7 downto 0) := (others => '0');
---signal data: std_logic_vector(15 downto 0) := (others => '0');
 
 begin
     DUT: ram_samples_255x16 port map(
