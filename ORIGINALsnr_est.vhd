@@ -16,19 +16,19 @@
 -- 
 -- Modulname:   snr_est
 --              
--- Sch‰tzung des Signalrauschabstandes bei QPSK modulierten Empfanssymbolen
+-- Sch√§tzung des Signalrauschabstandes bei QPSK modulierten Empfanssymbolen
 --
 -- =============================================================================
 --
 -- Die eingehenden Signale out_reverse, komplexe Abtastwerte (Symbole) bestehend
 -- aus data_i_in und data_q_in werden abgespeichert.
 -- Die Werte psf (Signalleistung FPGA) und prf (Gesamtleistung FPGA) werden 
--- w‰hrend des Symbolabspeicherns berechnet
+-- w√§hrend des Symbolabspeicherns berechnet
 -- Sind alle Daten empfangen, werden die berechneten Werte psf und prf und 
 -- die Anzhal der empfangenen Symbole ausgegeben. 
 -- Anschliessend werden die empfangenen Symbole (komplexe Abtastwerte) 
 -- ebenfalls ausgegeben. Dies geschieht entweder in der Reihenfolge wie sie 
--- empfangen wurden oder in umgedrehter Reihenfolge (abh‰ngig von dem 
+-- empfangen wurden oder in umgedrehter Reihenfolge (abh√§ngig von dem 
 -- Wert des gespeicherten Signals out_reverse).
 --
 -- Fuer eingehende Symbole wird Interface mit data_valid & data_last verwendet
